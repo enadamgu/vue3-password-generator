@@ -1,0 +1,263 @@
+@import "variables.scss";
+
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+body {
+    position: relative;
+    height: 100vh;
+    font-family: "poppins", sans-serif;
+    line-height: 1.7;
+    background-color: $base-color;
+    box-sizing: border-box;
+}
+
+.page-wrapper {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-color: black;
+    opacity: 0;
+    transition: all 0.5s ease;
+    &.isDark {
+        pointer-events: all;
+        opacity: 0.4;
+    }
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: transparent;
+    text-align: center;
+    background: linear-gradient(white, rgb(117, 117, 117));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    max-width: 600px;
+    transform: translate(-50%, -70%);
+    transition: all 0.5s ease;
+    &.isBlur {
+        filter: blur(20px);
+    }
+    .icon-wrapper {
+        position: relative;
+        left: 50%;
+        width: 70px;
+        height: 70px;
+        margin-bottom: 20px;
+        background-color: $green;
+        border-radius: 60px;
+        transform: translateX(-50%);
+        i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 40px;
+            color: $text-color;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+.card {
+    padding: 20px;
+    overflow: hidden;
+    background-color: $card-color;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 0px 35px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 35px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 35px 5px rgba(0, 0, 0, 0.2);
+
+    .size-wrapper {
+        margin: 40px 40px 40px 40px;
+        label {
+            display: flex;
+            color: $text-color;
+            justify-content: space-between;
+            align-items: center;
+        }
+        input {
+            max-width: 70px;
+            padding: 10px;
+            color: white;
+            background-color: $input-color;
+            border: 1px solid $input-border;
+        }
+    }
+    .checkbox-wrappper {
+        margin: 0px 40px;
+        overflow: hidden;
+        label {
+            display: flex;
+            margin-bottom: 10px;
+            color: $text-color;
+            transform: translateX(-120%);
+            justify-content: space-between;
+        }
+    }
+
+    .input-wrapper {
+        display: flex;
+        margin: 40px 40px 40px 40px;
+        align-items: center;
+        .lock-icon {
+            background-color: $input-border;
+            border: 1px solid $input-border;
+            border-right: none;
+            border-radius: 5px 0px 0px 5px;
+            i {
+                padding: 10px;
+                color: white;
+            }
+        }
+        input {
+            width: 100%;
+            padding: 10px 10px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--ci);
+            text-align: center;
+            background-color: $input-color;
+            border: 1px solid $input-border;
+            border-right: none;
+            border-left: none;
+            outline: none;
+        }
+        .copy-icon {
+            font-size: 15px;
+            background-color: $input-border;
+            border: 1px solid $input-border;
+            border-left: none;
+            border-radius: 0px 5px 5px 0px;
+            i {
+                padding: 10px;
+                color: white;
+            }
+        }
+    }
+    .button-wrapper {
+        margin: 20px 40px;
+        text-align: center;
+        button {
+            padding: 10px 20px;
+            color: $text-color;
+            background-color: $green;
+            border: none;
+            border-radius: 20px;
+            &:hover {
+                color: $green;
+                background-color: white;
+            }
+        }
+    }
+}
+
+.tooltip {
+    position: absolute;
+    right: 0px;
+    padding: 0px 10px;
+    margin-top: -30px;
+    font-size: 12px;
+    color: $green;
+    background-color: white;
+    border-radius: 4px;
+
+    &:after {
+        position: absolute;
+        top: 13px;
+        right: var(--i);
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid white;
+        content: "";
+        transform: rotate(90deg);
+    }
+    &-enter-active,
+    &-leave-active {
+        transition: opacity 0.5s ease;
+    }
+
+    &-enter-from,
+    &-leave-to {
+        opacity: 0;
+    }
+}
+
+.modal {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    z-index: 2000;
+    display: flex;
+    padding: 40px;
+    color: $text-color;
+    background-color: $card-color;
+    border-radius: 20px;
+    transform: translate(-50%, -50%);
+    -webkit-box-shadow: 0px 0px 35px 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 35px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 35px 5px rgba(0, 0, 0, 0.5);
+    align-items: center;
+    flex-direction: column;
+    &-title {
+        margin-top: 40px;
+        font-size: 50px;
+    }
+    .like {
+        position: absolute;
+        top: -40px;
+        width: 100px;
+        height: 100px;
+        background-color: var(--c);
+        border-radius: 100px;
+        i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 50px;
+            color: $text-color;
+            transform: translate(-50%, -50%);
+        }
+    }
+    button {
+        position: absolute;
+        bottom: -18px;
+        padding: 10px 40px;
+        color: white;
+        background-color: $green;
+        border: none;
+        border-radius: 20px;
+        &:hover {
+            color: $green;
+            background-color: white;
+        }
+    }
+
+    &-enter-from,
+    &-leave-to {
+        scale: 0;
+    }
+    &-enter-to,
+    &-leave-from {
+        scale: 1;
+    }
+    &-enter-active,
+    &-leave-active {
+        position: absolute;
+        transition: all 0.2s ease-in-out;
+    }
+}

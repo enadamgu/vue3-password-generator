@@ -1,0 +1,26 @@
+{
+    "name": "vue3-password-generator",
+    "private": true,
+    "version": "1.0.0",
+    "author": {
+        "name": "Enrique Adamuz",
+        "mail": "mail@blackend.es"
+    },
+    "license": "MIT",
+    "repository": "https://github.com/enadamgu/vue3-password-generator/tree/main",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "gsap": "^3.11.3",
+        "sass": "^1.55.0",
+        "vue": "^3.2.37",
+        "vue3-clipboard": "^1.0.0"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^3.1.0",
+        "vite": "^3.1.0"
+    }
+}

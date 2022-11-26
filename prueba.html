@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Expires" content="0" />
+        <meta http-equiv="Last-Modified" content="0" />
+        <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <title>Generador de Contraseñas - Rapido, sencillo y seguro</title>
+        <style type="text/css">
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #9b415c;
+                height: 100vh;
+            }
+
+            .password-generator {
+                padding: 40px;
+                background-color: #6f2f42;
+                color: white;
+                font-size: 20px;
+                font-family: sans-serif;
+            }
+
+            .password-generator div {
+                display: flex;
+                justify-content: space-between;
+                margin: 10px 0;
+            }
+
+            .password {
+                min-width: 280px;
+                background-color: #431c27;
+                color: rgb(199, 199, 199);
+            }
+
+            .password p {
+                padding: 6px 10px;
+            }
+
+            .password .clipboard {
+                width: 20%;
+                background-color: rgba(0, 0, 0, 0.575);
+                padding: 6px 10px;
+                font-size: large;
+                border: none;
+            }
+
+            .password .clipboard:hover {
+                width: 20%;
+                background-color: rgba(157, 156, 156, 0.575);
+                padding: 6px 10px;
+                font-size: large;
+                border: none;
+            }
+
+            .password-generator > button {
+                width: 100%;
+                border: none;
+                color: rgba(255, 255, 255, 0.699);
+                background-color: #2c131a;
+                padding: 10px;
+            }
+        </style>
+        <script type="text/javascript">
+            const keys = {
+                upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                lowerCase: "abcdefghijklmnopqrstuvwxyz",
+                number: "0123456789",
+                symbol: "!@#$%^&*()_+~\`|}{[]:;?><,./-=",
+            };
+            const getKey = [
+                function upperCase() {
+                    return keys.upperCase[Math.floor(Math.random() * keys.upperCase.length)];
+                },
+                function lowerCase() {
+                    return keys.lowerCase[Math.floor(Math.random() * keys.lowerCase.length)];
+                },
+                function number() {
+                    return keys.number[Math.floor(Math.random() * keys.number.length)];
+                },
+                function symbol() {
+                    return keys.symbol[Math.floor(Math.random() * keys.symbol.length)];
+                },
+            ];
+
+            function createPassword() {
+                const upper = document.getElementById("upperCase").checked;
+                const lower = document.getElementById("lowerCase").checked;
+                const number = document.getElementById("number").checked;
+                const symbol = document.getElementById("symbol").checked;
+                if (upper + lower + number + symbol === 0) {
+                    alert("Debes selecionar al menos un requisito");
+                    return;
+                }
+                const passwordBox = document.getElementById("passwordBox");
+                const length = document.getElementById("length");
+                let password = "";
+                while (length.value > password.length) {
+                    let keyToAdd = getKey[Math.floor(Math.random() * getKey.length)];
+                    let isChecked = document.getElementById(keyToAdd.name).checked;
+                    if (isChecked) {
+                        password += keyToAdd();
+                    }
+                }
+                passwordBox.innerHTML = password;
+            }
+            function copyPassword() {
+                const textarea = document.createElement("textarea");
+                const password = document.getElementById("passwordBox").innerText;
+                if (!password) {
+                    return;
+                }
+                textarea.value = password;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand("copy");
+                textarea.remove();
+                alert("Contraseña copiada a portapapeles.");
+            }
+        </script>
+    </head>
+
+    <body onload="createPassword()">
+        <div class="container">
+            <div class="password-generator">
+                <h2>Generar Contraseña</h2>
+                <div class="password">
+                    <p id="passwordBox"></p>
+                    <button class="clipboard" onclick="copyPassword()">&#128203;</button>
+                </div>
+                <div>
+                    <label for="length">Longitud</label>
+                    <select name="length" id="length">
+                        <optgroup label="Corta">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </optgroup>
+                        <optgroup label="Mediana">
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12" selected="selected">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                        </optgroup>
+                        <optgroup label="Larga">
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div>
+                    <label for="symbol">Símbolos</label>
+                    <input type="checkbox" id="symbol" />
+                </div>
+                <div>
+                    <label for="number">Números</label>
+                    <input type="checkbox" id="number" checked />
+                </div>
+                <div>
+                    <label for="lowerCase">Minúsculas</label>
+                    <input type="checkbox" id="lowerCase" checked />
+                </div>
+                <div>
+                    <label for="upperCase">Mayúsculas</label>
+                    <input type="checkbox" id="upperCase" checked />
+                </div>
+                <button onclick="createPassword()">Generar contraseña</button>
+            </div>
+        </div>
+    </body>
+</html>
